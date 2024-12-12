@@ -29,8 +29,8 @@ class UserRegisterRequest extends FormRequest
             'age' => 'required|string|min:1|max:255',
             'gender' => 'required|string|min:1|max:255',
             'goals' => 'required|string|min:1|max:255',
-            'weight' => 'required|double|min:1|max:9999',
-            'height' => 'required|double|min:1|max:9999',
+            'weight' => 'required|numeric|min:1|max:9999',
+            'height' => 'required|numeric|min:1|max:9999',
         ];
     }
 }
