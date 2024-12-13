@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OtpController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,4 +33,14 @@ Route::prefix('/users')->group(function () {
 
     Route::delete('/logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
     Route::delete('/delete/{id}', [UserController::class, 'delete']);
+});
+
+Route::prefix('/otp')->group(function () {
+    Route::post('/store', [OtpController::class, 'store']);
+    Route::post('/check', [OtpController::class, 'check']);
+    Route::post('/reset-password', [OtpController::class, 'resetPassword']);
+
+    Route::get('/index', [OtpController::class, 'index']);
+    Route::get('/show-current', [OtpController::class, 'showCurrent']);
+    Route::get('show-by-email/{email}', [OtpController::class, 'showByEmail']);
 });
