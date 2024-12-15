@@ -13,12 +13,21 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    private function calculateAge($date_of_birth)
+    {
+        $birthDate = new \DateTime($date_of_birth);
+        $currentDate = new \DateTime();
+        $age = $currentDate->diff($birthDate)->y;
+        return $age;
+    }
+
     public function register(UserRegisterRequest $request)
     {
         $request->validated();
 
         $userData = $request->all();
         $userData['password'] = Hash::make($request->password);
+        $userData['age'] = $this->calculateAge($request->date_of_birth);
 
         $user = User::create($userData);
         $user = new UserResource($user);
@@ -52,9 +61,8 @@ class UserController extends Controller
     {
         $request->validated();
         $user = User::where('email', $request->email)->first();
-
         if (! $user) {
-            return response(['message' => 'User Not Found'], 404);
+            return $this->resDataNotFound('User With Current Email');
         }
 
         return response(['message' => 'User Found'], 200);
@@ -77,7 +85,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         if (! $user) {
-            return $this->resUserNotFound();
+            return $this->resDataNotFound('User With Current ID');
         }
 
         return new UserResource($user);
@@ -88,6 +96,11 @@ class UserController extends Controller
         $user = auth()->user();
         if (! $user) {
             return $this->resUserNotFound();
+        }
+
+        $calculatedAge = $this->calculateAge($user["date_of_birth"]);
+        if ($user["age"] !== $calculatedAge) {
+            $user->update(['age' => $calculatedAge]);
         }
 
         return new UserResource($user);
@@ -103,11 +116,17 @@ class UserController extends Controller
 
         $user = User::find($id);
         if (! $user) {
-            return $this->resUserNotFound();
+            return $this->resDataNotFound('User With Current ID');
         }
 
         $userData = $request->all();
         $user->update($userData);
+
+        $calculatedAge = $this->calculateAge($user["date_of_birth"]);
+        if ($user["age"] !== $calculatedAge) {
+            $user->update(['age' => $calculatedAge]);
+        }
+
         $user = new UserResource($user);
 
         return $this->resUpdatedData($user);
@@ -122,7 +141,7 @@ class UserController extends Controller
 
         $user = User::find($id);
         if (! $user) {
-            return $this->resUserNotFound();
+            return $this->resDataNotFound('User With Current ID');
         }
 
         $user->delete();

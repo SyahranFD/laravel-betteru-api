@@ -21,5 +21,6 @@ class User extends Authenticatable
     protected $casts = [
         'weight' => 'float',
         'height' => 'float',
+        'is_verified_email' => 'boolean',
     ];
 }

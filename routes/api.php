@@ -29,16 +29,17 @@ Route::prefix('/users')->group(function () {
     Route::get('/show/{id}', [UserController::class, 'showById']);
     Route::get('/show-current', [UserController::class, 'showCurrent'])->middleware('auth:sanctum');
 
-    Route::put('/update/{id}', [UserController::class, 'update']);
+    Route::put('/update/{id}', [UserController::class, 'update'])->middleware('auth:sanctum');
 
     Route::delete('/logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
-    Route::delete('/delete/{id}', [UserController::class, 'delete']);
+    Route::delete('/delete/{id}', [UserController::class, 'delete'])->middleware('auth:sanctum');
 });
 
 Route::prefix('/otp')->group(function () {
     Route::post('/store', [OtpController::class, 'store']);
     Route::post('/check', [OtpController::class, 'check']);
-    Route::post('/reset-password', [OtpController::class, 'resetPassword']);
+
+    Route::put('/reset-password', [OtpController::class, 'resetPassword']);
 
     Route::get('/index', [OtpController::class, 'index']);
     Route::get('/show-current', [OtpController::class, 'showCurrent']);

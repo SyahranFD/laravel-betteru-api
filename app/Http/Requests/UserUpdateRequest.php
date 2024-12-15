@@ -24,7 +24,6 @@ class UserUpdateRequest extends FormRequest
         return [
             'name' => 'required|string|min:1|max:255',
             'date_of_birth' => 'required|string|min:1|max:255',
-            'age' => 'required|string|min:1|max:255',
             'gender' => 'required|string|min:1|max:255',
             'goals' => 'required|string|min:1|max:255',
             'weight' => 'required|numeric|min:1|max:9999',
