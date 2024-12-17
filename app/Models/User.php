@@ -23,4 +23,9 @@ class User extends Authenticatable
         'height' => 'float',
         'is_verified_email' => 'boolean',
     ];
+
+    public function dailyActivities()
+    {
+        return $this->hasMany(DailyActivity::class);
+    }
 }
