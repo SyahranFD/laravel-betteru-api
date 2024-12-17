@@ -52,18 +52,8 @@ class DailyActivityController extends Controller
         }
 
         $dailyActivity = $dailyActivity->get();
-        $totalKalori = round($dailyActivity->sum('kalori'), 2);
-        $totalLemak = round($dailyActivity->sum('lemak'), 2);
-        $totalProtein = round($dailyActivity->sum('protein'), 2);
-        $totalKarbohidrat = round($dailyActivity->sum('karbohidrat'), 2);
 
-        return response([
-            'data' => DailyActivityResource::collection($dailyActivity),
-            'total_kalori' => $totalKalori,
-            'total_lemak' => $totalLemak,
-            'total_protein' => $totalProtein,
-            'total_karbohidrat' => $totalKarbohidrat,
-        ]);
+        return DailyActivityResource::collection($dailyActivity);
     }
 
     public function showTotalNutrisi(Request $request)
