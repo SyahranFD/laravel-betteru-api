@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('goals');
             $table->double('weight');
             $table->double('height');
+            $table->string('activity_level');
             $table->boolean('is_verified_email')->default(false);
             $table->rememberToken();
             $table->timestamps();

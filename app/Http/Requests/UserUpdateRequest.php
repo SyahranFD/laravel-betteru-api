@@ -28,6 +28,7 @@ class UserUpdateRequest extends FormRequest
             'goals' => 'required|string|min:1|max:255',
             'weight' => 'required|numeric|min:1|max:9999',
             'height' => 'required|numeric|min:1|max:9999',
+            'activity_level' => 'required|string|min:1|max:255',
         ];
     }
 }

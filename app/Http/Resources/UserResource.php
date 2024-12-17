@@ -24,6 +24,7 @@ class UserResource extends JsonResource
             'goals' => $this->goals,
             'weight' => $this->weight,
             'height' => $this->height,
+            'activity_level' => $this->activity_level,
         ];
     }
 }
