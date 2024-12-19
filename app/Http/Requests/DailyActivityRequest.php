@@ -24,6 +24,7 @@ class DailyActivityRequest extends FormRequest
         return [
             'category' => 'required|string|min:1|max:9999',
             'name' => 'required|string|min:1|max:9999',
+            'note' => 'string|min:1|max:9999',
             'kalori' => 'numeric|min:0|max:999999',
             'lemak' => 'numeric|min:0|max:999999',
             'protein' => 'numeric|min:0|max:999999',

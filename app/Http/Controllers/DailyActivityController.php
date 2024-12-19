@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\DailyActivityRequest;
 use App\Http\Resources\DailyActivityResource;
 use App\Models\DailyActivity;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DailyActivityController extends Controller
@@ -56,10 +57,10 @@ class DailyActivityController extends Controller
         return DailyActivityResource::collection($dailyActivity);
     }
 
-    public function showTotalNutrisi(Request $request)
+    public function showTotalNutrition(Request $request)
     {
         $user = auth()->user();
-        $date = $request->query('date');
+        $date = $request->query('date') ?? now()->format('Y-m-d');
 
         $dailyActivity = DailyActivity::where('user_id', $user->id);
 
@@ -83,6 +84,41 @@ class DailyActivityController extends Controller
             'total_protein' => $totalProtein,
             'total_karbohidrat' => $totalKarbohidrat,
         ]);
+    }
+
+    public function showHistoryTotalNutrition(Request $request)
+    {
+        $user = auth()->user();
+        $days = $request->query('days') ?? 7;
+
+        $startDate = now()->subDays($days - 1)->startOfDay();
+        $endDate = now()->endOfDay();
+
+        $dailyActivities = DailyActivity::where('user_id', $user->id)
+            ->whereBetween('date', [$startDate, $endDate])
+            ->get()
+            ->groupBy(function($date) {
+                return Carbon::parse($date->date)->format('Y-m-d');
+            });
+
+        $historyTotalNutrition = collect();
+
+        for ($date = $startDate; $date->lte($endDate); $date->addDay()) {
+            $dateString = $date->format('Y-m-d');
+            $activities = $dailyActivities->get($dateString, collect());
+
+            $historyTotalNutrition->push([
+                'date' => $dateString,
+                'total_kalori_makan' => round($activities->where('category', 'Makan')->sum('kalori'), 2),
+                'total_kalori_aktivitas' => round($activities->where('category', 'Aktivitas')->sum('kalori'), 2),
+                'total_kalori_sekarang' => round($activities->where('category', 'Makan')->sum('kalori') - $activities->where('category', 'Aktivitas')->sum('kalori'), 2),
+                'total_lemak' => round($activities->sum('lemak'), 2),
+                'total_protein' => round($activities->sum('protein'), 2),
+                'total_karbohidrat' => round($activities->sum('karbohidrat'), 2),
+            ]);
+        }
+
+        return response($historyTotalNutrition->sortByDesc('date')->values());
     }
 
     public function update(DailyActivityRequest $request, $id)

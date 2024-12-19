@@ -19,6 +19,7 @@ class DailyActivityResource extends JsonResource
             'user_id' => $this->user_id,
             'category' => $this->category,
             'name' => $this->name,
+            'note' => $this->note,
             'kalori' => $this->kalori,
             'lemak' => $this->lemak,
             'protein' => $this->protein,

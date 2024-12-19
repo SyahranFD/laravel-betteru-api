@@ -53,7 +53,8 @@ Route::prefix('/daily-activity')->group(function () {
     Route::get('/index', [DailyActivityController::class, 'index']);
     Route::get('/show/{id}', [DailyActivityController::class, 'showById']);
     Route::get('/show-current', [DailyActivityController::class, 'showCurrent'])->middleware('auth:sanctum');
-    Route::get('/show-total-nutrisi', [DailyActivityController::class, 'showTotalNutrisi'])->middleware('auth:sanctum');
+    Route::get('/show-total-nutrition', [DailyActivityController::class, 'showTotalNutrition'])->middleware('auth:sanctum');
+    Route::get('/show-history-total-nutrition', [DailyActivityController::class, 'showHistoryTotalNutrition'])->middleware('auth:sanctum');
 
     Route::put('/update/{id}', [DailyActivityController::class, 'update'])->middleware('auth:sanctum');
     Route::delete('/delete/{id}', [DailyActivityController::class, 'delete'])->middleware('auth:sanctum');
