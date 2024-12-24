@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FoodController;
 use App\Http\Controllers\DailyActivityController;
 use App\Http\Controllers\OtpController;
 use App\Http\Controllers\UserController;
@@ -58,4 +59,14 @@ Route::prefix('/daily-activity')->group(function () {
 
     Route::put('/update/{id}', [DailyActivityController::class, 'update'])->middleware('auth:sanctum');
     Route::delete('/delete/{id}', [DailyActivityController::class, 'delete'])->middleware('auth:sanctum');
+});
+
+Route::prefix('/foods')->group(function () {
+    Route::post('/store', [FoodController::class, 'store'])->middleware('auth:sanctum');
+
+    Route::get('/index', [FoodController::class, 'index']);
+    Route::get('/show/{id}', [FoodController::class, 'showById']);
+
+    Route::put('/update/{id}', [FoodController::class, 'update'])->middleware('auth:sanctum');
+    Route::delete('/delete/{id}', [FoodController::class, 'delete'])->middleware('auth:sanctum');
 });
