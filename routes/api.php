@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\FoodController;
+use App\Http\Controllers\DailyActivityController;
 use App\Http\Controllers\OtpController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -44,4 +46,27 @@ Route::prefix('/otp')->group(function () {
     Route::get('/index', [OtpController::class, 'index']);
     Route::get('/show-current', [OtpController::class, 'showCurrent']);
     Route::get('show-by-email/{email}', [OtpController::class, 'showByEmail']);
+});
+
+Route::prefix('/daily-activity')->group(function () {
+    Route::post('/store', [DailyActivityController::class, 'store'])->middleware('auth:sanctum');
+
+    Route::get('/index', [DailyActivityController::class, 'index']);
+    Route::get('/show/{id}', [DailyActivityController::class, 'showById']);
+    Route::get('/show-current', [DailyActivityController::class, 'showCurrent'])->middleware('auth:sanctum');
+    Route::get('/show-total-nutrition', [DailyActivityController::class, 'showTotalNutrition'])->middleware('auth:sanctum');
+    Route::get('/show-history-total-nutrition', [DailyActivityController::class, 'showHistoryTotalNutrition'])->middleware('auth:sanctum');
+
+    Route::put('/update/{id}', [DailyActivityController::class, 'update'])->middleware('auth:sanctum');
+    Route::delete('/delete/{id}', [DailyActivityController::class, 'delete'])->middleware('auth:sanctum');
+});
+
+Route::prefix('/foods')->group(function () {
+    Route::post('/store', [FoodController::class, 'store'])->middleware('auth:sanctum');
+
+    Route::get('/index', [FoodController::class, 'index']);
+    Route::get('/show/{id}', [FoodController::class, 'showById']);
+
+    Route::put('/update/{id}', [FoodController::class, 'update'])->middleware('auth:sanctum');
+    Route::delete('/delete/{id}', [FoodController::class, 'delete'])->middleware('auth:sanctum');
 });
