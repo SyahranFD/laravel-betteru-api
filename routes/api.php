@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\SportCategoryController;
 use App\Http\Controllers\SportController;
 use App\Http\Controllers\FoodController;
@@ -79,4 +80,13 @@ Route::prefix('/sports')->group(function () {
 
 Route::prefix('/sport-categories')->group(function () {
     Route::get('/index', [SportCategoryController::class, 'index']);
+});
+
+Route::prefix('/images')->group(function () {
+    Route::post('/store', [ImageController::class, 'store'])->middleware('auth:sanctum');
+
+    Route::get('/index', [ImageController::class, 'index']);
+    Route::get('/show/{id}', [ImageController::class, 'showById']);
+
+    Route::delete('/delete/{id}', [ImageController::class, 'delete'])->middleware('auth:sanctum');
 });
