@@ -25,11 +25,13 @@ class FoodController extends Controller
     {
         $goals = $request->query('goals');
 
-        $food = Food::all();
+        $food = Food::query();
 
         if ($goals && $goals !== '') {
-            $food = Food::where('goals', $goals)->get();
+            $food->where('goals', $goals);
         }
+
+        $food = $food->get();
 
         return FoodResource::collection($food);
     }

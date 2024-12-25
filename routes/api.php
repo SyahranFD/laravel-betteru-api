@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\SportCategoryController;
+use App\Http\Controllers\SportController;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\DailyActivityController;
 use App\Http\Controllers\OtpController;
@@ -69,4 +71,12 @@ Route::prefix('/foods')->group(function () {
 
     Route::put('/update/{id}', [FoodController::class, 'update'])->middleware('auth:sanctum');
     Route::delete('/delete/{id}', [FoodController::class, 'delete'])->middleware('auth:sanctum');
+});
+
+Route::prefix('/sports')->group(function () {
+    Route::get('/index', [SportController::class, 'index']);
+});
+
+Route::prefix('/sport-categories')->group(function () {
+    Route::get('/index', [SportCategoryController::class, 'index']);
 });
