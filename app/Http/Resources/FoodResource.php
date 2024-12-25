@@ -24,6 +24,7 @@ class FoodResource extends JsonResource
             'note' => $this->note,
             'imageUrl' => $this->imageUrl,
             'videoUrl' => $this->videoUrl,
+            'time' => $this->time,
             'goals' => $this->goals,
         ];
     }

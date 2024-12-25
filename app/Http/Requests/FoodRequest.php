@@ -30,6 +30,7 @@ class FoodRequest extends FormRequest
             'note' => 'nullable|string',
             'imageUrl' => 'nullable|string',
             'videoUrl' => 'nullable|string',
+            'time' => 'nullable|numeric',
             'goals' => 'nullable|string',
         ];
     }

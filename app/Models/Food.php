@@ -16,5 +16,6 @@ class Food extends Model
         'lemak' => 'float',
         'protein' => 'float',
         'karbohidrat' => 'float',
+        'time' => 'integer',
     ];
 }

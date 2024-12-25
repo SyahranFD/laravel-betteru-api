@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('note')->nullable();
             $table->text('imageUrl')->nullable();
             $table->text('videoUrl')->nullable();
+            $table->integer('time')->nullable();
             $table->string('goals')->nullable();
             $table->timestamps();
         });
