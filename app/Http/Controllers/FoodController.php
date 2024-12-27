@@ -24,11 +24,16 @@ class FoodController extends Controller
     public function index(Request $request)
     {
         $goals = $request->query('goals');
+        $search = $request->query('search');
 
         $food = Food::query();
 
         if ($goals && $goals !== '') {
             $food->where('goals', $goals);
+        }
+
+        if ($search && $search !== '') {
+            $food->where('name', 'like', '%' . $search . '%');
         }
 
         $food = $food->get();
