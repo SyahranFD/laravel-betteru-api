@@ -25,6 +25,7 @@ class FoodController extends Controller
     {
         $goals = $request->query('goals');
         $search = $request->query('search');
+        $sortClickCount = $request->query('sort_click_count');
 
         $food = Food::query();
 
@@ -34,6 +35,10 @@ class FoodController extends Controller
 
         if ($search && $search !== '') {
             $food->where('name', 'like', '%' . $search . '%');
+        }
+
+        if ($sortClickCount && $sortClickCount !== '') {
+            $food->orderBy('click_count', $sortClickCount);
         }
 
         $food = $food->get();
@@ -66,6 +71,18 @@ class FoodController extends Controller
         $food = new FoodResource($food);
 
         return $this->resUpdatedData($food);
+    }
+
+    public function updateClick($id)
+    {
+        $food = Food::find($id);
+        if (!$food) {
+            return $this->resDataNotFound("Food");
+        }
+
+        $food->increment('click_count');
+
+        return response(['message' => 'Click count for ' . $food->name . ' updated to ' . $food->click_count], 200);
     }
 
     public function delete($id)

@@ -17,5 +17,6 @@ class Food extends Model
         'protein' => 'float',
         'karbohidrat' => 'float',
         'time' => 'integer',
+        'click_count' => 'integer',
     ];
 }

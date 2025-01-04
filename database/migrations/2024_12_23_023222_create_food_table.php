@@ -23,6 +23,7 @@ return new class extends Migration
             $table->text('videoUrl')->nullable();
             $table->integer('time')->nullable();
             $table->string('goals')->nullable();
+            $table->integer("click_count")->default(0);
             $table->timestamps();
         });
     }
