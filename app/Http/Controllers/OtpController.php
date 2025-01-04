@@ -21,7 +21,7 @@ class OtpController extends Controller
     {
         $otpData['otp'] = rand(1000, 9999);
         $otpData['email'] = $request->email;
-        $otpData['expired_at'] = now()->addMinutes(6);
+        $otpData['expired_at'] = now()->addMinutes(2);
 
         do {
             $otpData['id'] = 'otp-'.Str::uuid();

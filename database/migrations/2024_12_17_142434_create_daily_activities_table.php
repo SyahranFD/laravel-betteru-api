@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->string('category');
             $table->string('name');
-            $table->string('note')->nullable();
+            $table->text('note')->nullable();
             $table->double('kalori')->nullable();
             $table->double('lemak')->nullable();
             $table->double('protein')->nullable();
