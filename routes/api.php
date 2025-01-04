@@ -71,6 +71,7 @@ Route::prefix('/foods')->group(function () {
     Route::get('/show/{id}', [FoodController::class, 'showById']);
 
     Route::put('/update/{id}', [FoodController::class, 'update'])->middleware('auth:sanctum');
+    Route::put('/update-click/{id}', [FoodController::class, 'updateClick'])->middleware('auth:sanctum');
     Route::delete('/delete/{id}', [FoodController::class, 'delete'])->middleware('auth:sanctum');
 });
 

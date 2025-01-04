@@ -26,6 +26,7 @@ class FoodResource extends JsonResource
             'videoUrl' => $this->videoUrl,
             'time' => $this->time,
             'goals' => $this->goals,
+            'click_count' => $this->click_count,
         ];
     }
 }
