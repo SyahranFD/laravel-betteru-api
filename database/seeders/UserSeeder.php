@@ -65,6 +65,7 @@ class UserSeeder extends Seeder
             }
         }
 
+        // Daily Activity Aktivitas Rey
         $activities = [
             ['name' => 'Jogging', 'note' => 'Lari ringan selama 30 menit di pagi hari untuk menjaga kebugaran dan meningkatkan stamina. Baik untuk kesehatan jantung.', 'kalori' => 250],
             ['name' => 'Senam Pagi', 'note' => 'Gerakan pemanasan dan peregangan selama 20 menit. Baik untuk melancarkan peredaran darah dan menjaga fleksibilitas tubuh.', 'kalori' => 150],
@@ -96,6 +97,12 @@ class UserSeeder extends Seeder
             }
         }
 
-
+        // Daily Water Rey
+        for ($i = 1; $i <= 31; $i++) {
+            $rey->dailyWaters()->create([
+                'date' => now()->subDays($i)->toDateString(),
+                'amount' => rand(3, 10) * 200,
+            ]);
+        }
     }
 }

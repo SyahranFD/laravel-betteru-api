@@ -15,7 +15,8 @@ class DailyWaterResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'amount' => $this->amount / 1000,
+            'amount' => number_format($this->amount / 1000, 1),
+            'total_glasses' => intval($this->amount / 200),
             'date' => $this->date,
         ];
     }
