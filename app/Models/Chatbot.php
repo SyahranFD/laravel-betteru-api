@@ -5,18 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DailyWater extends Model
+class Chatbot extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
 
-    protected $casts = [
-        'amount' => 'integer',
-    ];
-
-    public function user()
+    public function chatbot()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasMany(Chatbot::class);
     }
 }
