@@ -94,7 +94,7 @@ class DailyActivityController extends Controller
         $userCreatedAt = Carbon::parse($user->created_at)->startOfDay()->addDay();
         $startDate = now()->subDays($days - 1)->startOfDay();
         $startDate = $startDate->lt($userCreatedAt) ? $userCreatedAt : $startDate;
-        $endDate = now()->endOfDay();
+        $endDate = now()->subDay()->endOfDay();
 
         $dailyActivities = DailyActivity::where('user_id', $user->id)
             ->whereBetween('date', [$startDate, $endDate])

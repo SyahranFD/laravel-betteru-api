@@ -72,8 +72,6 @@ class DailyWaterController extends Controller
         }
 
         return new DailyWaterResource($dailyWater);
-
-        return new DailyWaterResource($dailyWater);
     }
 
     public function showHistory(Request $request)
