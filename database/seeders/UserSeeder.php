@@ -22,11 +22,12 @@ class UserSeeder extends Seeder
             'date_of_birth' => '2004-12-12',
             'age' => 21,
             'gender' => 'Laki Laki',
-            'goals' => 'Menaikkan Berat Badan Ekstrim',
+            'goals' => 'Menaikkan Berat Badan',
             'weight' => 60,
             'height' => 168,
             'activity_level' => 'Sangat Jarang Beraktivitas',
             'is_verified_email' => true,
+            'created_at' => '1999-01-01 00:00:00',
         ]);
     }
 }
