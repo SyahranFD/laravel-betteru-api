@@ -28,4 +28,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(DailyActivity::class);
     }
+
+    public function dailyWaters()
+    {
+        return $this->hasMany(DailyWater::class);
+    }
+
+    public function chatbots()
+    {
+        return $this->hasMany(Chatbot::class);
+    }
 }

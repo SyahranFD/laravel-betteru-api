@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\DailyWaterController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\SportCategoryController;
@@ -99,4 +100,9 @@ Route::prefix('/daily-waters')->group(function () {
 
     Route::get('/show-current', [DailyWaterController::class, 'showCurrent'])->middleware('auth:sanctum');
     Route::get('/show-history', [DailyWaterController::class, 'showHistory'])->middleware('auth:sanctum');
+});
+
+Route::prefix('/chatbots')->group(function () {
+    Route::post('/store', [ChatbotController::class, 'store'])->middleware('auth:sanctum');
+    Route::get('/show-current', [ChatbotController::class, 'showCurrent'])->middleware('auth:sanctum');
 });
