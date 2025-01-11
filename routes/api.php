@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DailyWaterController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\SportCategoryController;
 use App\Http\Controllers\SportController;
@@ -90,4 +91,12 @@ Route::prefix('/images')->group(function () {
     Route::get('/show/{id}', [ImageController::class, 'showById']);
 
     Route::delete('/delete/{id}', [ImageController::class, 'delete'])->middleware('auth:sanctum');
+});
+
+Route::prefix('/daily-waters')->group(function () {
+    Route::post('/increase', [DailyWaterController::class, 'increase'])->middleware('auth:sanctum');
+    Route::post('/decrease', [DailyWaterController::class, 'decrease'])->middleware('auth:sanctum');
+
+    Route::get('/show-current', [DailyWaterController::class, 'showCurrent'])->middleware('auth:sanctum');
+    Route::get('/show-history', [DailyWaterController::class, 'showHistory'])->middleware('auth:sanctum');
 });
